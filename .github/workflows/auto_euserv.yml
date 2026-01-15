@@ -2,7 +2,7 @@ name: Auto EUserv
 
 on:
   schedule:
-    - cron: '0 14 * * SUN'  # 每周日 UTC 时间 12:00 运行
+    - cron: '0 14 * * SUN'  # 每周日 UTC 时间 14:00 运行
   workflow_dispatch:
 
 jobs:
@@ -11,16 +11,43 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@main
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@main
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.x'  # 指定Python3.x
+        python-version: '3.x'
 
     - name: Install dependencies
       run: |
+        pip install --upgrade pip
         pip install requests beautifulsoup4
+
+    - name: Check required secrets
+      run: |
+        REQUIRED_SECRETS=(
+          EUSERV_USERNAME
+          EUSERV_PASSWORD
+          TRUECAPTCHA_USERID
+          TRUECAPTCHA_APIKEY
+          TG_BOT_TOKEN
+          TG_USER_ID
+          MAILPARSER_DOWNLOAD_URL_ID
+        )
+        MISSING_SECRETS=()
+        for SECRET in "${REQUIRED_SECRETS[@]}"; do
+          VALUE="${{ secrets[SECRET] }}"
+          if [ -z "$VALUE" ]; then
+            MISSING_SECRETS+=($SECRET)
+          fi
+        done
+
+        if [ ${#MISSING_SECRETS[@]} -ne 0 ]; then
+          echo "❌ Missing required secrets: ${MISSING_SECRETS[*]}"
+          exit 1
+        else
+          echo "✅ All required secrets are set."
+        fi
 
     - name: Run script
       env:
