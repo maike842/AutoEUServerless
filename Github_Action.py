@@ -24,6 +24,8 @@ TRUECAPTCHA_APIKEY = os.getenv("TRUECAPTCHA_APIKEY", "").strip()
 TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN", "").strip()
 TG_USER_ID = os.getenv("TG_USER_ID", "").strip()
 MAILPARSER_DOWNLOAD_URL_ID = os.getenv("MAILPARSER_DOWNLOAD_URL_ID", "").strip()
+MAILPARSER_DOWNLOAD_BASE_URL = "https://files.mailparser.io/d/"
+TG_API_HOST = "https://api.telegram.org"
 
 # 账户信息：用户名和密码
 # USERNAME = os.getenv('EUSERV_USERNAME')  # 填写用户名或邮箱
