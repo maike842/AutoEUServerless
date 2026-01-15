@@ -15,10 +15,19 @@ import time
 import base64
 import requests
 from bs4 import BeautifulSoup
+import os
+
+USERNAME = os.getenv("EUSERV_USERNAME", "").strip()
+PASSWORD = os.getenv("EUSERV_PASSWORD", "").strip()
+TRUECAPTCHA_USERID = os.getenv("TRUECAPTCHA_USERID", "").strip()
+TRUECAPTCHA_APIKEY = os.getenv("TRUECAPTCHA_APIKEY", "").strip()
+TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN", "").strip()
+TG_USER_ID = os.getenv("TG_USER_ID", "").strip()
+MAILPARSER_DOWNLOAD_URL_ID = os.getenv("MAILPARSER_DOWNLOAD_URL_ID", "").strip()
 
 # 账户信息：用户名和密码
-USERNAME = os.getenv('EUSERV_USERNAME')  # 填写用户名或邮箱
-PASSWORD = os.getenv('EUSERV_PASSWORD')  # 填写密码
+# USERNAME = os.getenv('EUSERV_USERNAME')  # 填写用户名或邮箱
+# PASSWORD = os.getenv('EUSERV_PASSWORD')  # 填写密码
 
 # TrueCaptcha API 配置
 TRUECAPTCHA_USERID = os.getenv('TRUECAPTCHA_USERID')
